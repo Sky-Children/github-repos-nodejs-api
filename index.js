@@ -1,26 +1,9 @@
-const express = require('express');
-const fs = require('fs');
-const app = express();
+const express = require("express")
+const server = express();
+
 const PORT = process.env.PORT || 8081;
+server.listen(PORT, function () { //在3001端口启动
+    console.log('Example app listening on port 3001');
+})
 
-app.get('/', async (req, res) => {
-  try {
-    fs.readFile("apps/Index.html",(err,data)=>{
-      if(err!=null)
-      {
-        res.status(404).send(err.message);  
-      }
-      else  
-      {
-        res.send(data);
-        
-      }
-    })
-  } catch (error) {
-    res.status(400).send('Error while getting list of repositories');
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
-});
+server.use('', express.static('./apps/'))
