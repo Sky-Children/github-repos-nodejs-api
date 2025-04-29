@@ -1,0 +1,195 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2vh 2vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%; 
+    height: 100%;
+    z-index: -1;
+    object-fit: cover; /* 让视频铺满屏幕 */
+    object-position: center; /* 确保视频内容居中显示 */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0); /* 背景完全透明 */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90vw;
+    max-width: 37.5rem;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1; /* 添加 z-index 属性 */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    font-size: 4vw;
+    margin-top: 2vw;
+    min-height: 5vw;
+    max-width: 90vw;
+}
+
+@media (min-width: 768px) {
+    #result {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        min-height: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    #background-video {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+    }
+}
+@keyframes drawAnimation {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.animating {
+    animation: drawAnimation 1s infinite;
+}
+
+.bamboo-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    height: 100vw;
+    max-width: 150px;
+    max-height: 300px;
+    background: none;
+}
+
+.bamboo-stick-text { 
+    color: #ffd700; /* 金色文字 */
+    font-family: 'SimSun', serif; /* 宋体字体 */
+    font-size: 1.4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 添加文字阴影 */
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 100%;
+    margin-top: 60px;
+    transition: opacity 0.3s;
+}
+
+@keyframes firework {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100px) scale(3); opacity: 0; }
+}
+
+.firework-effect {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff0000; /* 红色烟花 */
+    animation: firework 1s ease-out;
+}
+
+@keyframes drawStick {
+    0% {
+        bottom: 250px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(0deg);
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        bottom: 450px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(5deg);
+    }
+    100% {
+        bottom: 450px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(5deg);
+    }
+}
+
+.draw-anim {
+    animation: drawStick 1s forwards;
+}
+
+
+@keyframes textDissolve {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+    50% {
+        transform: translate(0, -100px) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: translate(calc(-50% + (calc(var(--random-x, 0) * 5px))), calc(-50% - 200px + (calc(var(--random-y, 0) * 5px)))) scale(2);
+        opacity: 0;
+        filter: blur(5px);
+    }
+}
+
+.result-text {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.8rem;
+    color: #ff6600;
+    font-family: 'Microsoft YaHei', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: textDissolve 2s ease-out forwards;
+}
+
+h1 {
+    color: #FFF3CC;
+    -webkit-text-stroke: 1px white;
+    text-stroke: 1px white;
+}
+
+#background-image {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%; 
+    height: 100%; /* 修改为 100% 以铺满屏幕 */
+    z-index: -2; /* 确保图片在视频下方 */
+    background-image: url('ab403739-c662-4bae-a540-531dacbbcb4f.jpg');
+    background-size: cover;
+    background-position: center;
+}
